@@ -18,7 +18,7 @@ process.load('Geometry.CSCGeometryBuilder.idealForDigiCscGeometry_cff')
 #process.GlobalTag.globaltag = 'POSTLS161_V12::All'
 
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(2) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1) )
 
 
 process.source = cms.Source("EmptySource")

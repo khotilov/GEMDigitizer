@@ -63,11 +63,13 @@ GEMFakeEvent::produce(edm::Event & ev, const edm::EventSetup& es)
         for (int p = 1; p <= nEtaPartitions_; ++p)
         {
           GEMDetId d(e, 1, 1, l, c, p);
-          const GEMEtaPartition* ep = gemGeom->etaPartition(p);
-          cout <<"----- adding digis in GEM "<<d<<" with number of strips "<< ep->nstrips()<<endl;
-          for (int s = 0; s <= ep->nstrips(); ++s)
+          const GEMEtaPartition* ep = gemGeom->etaPartition(d);
+          int ntrips = ep->nstrips();
+          cout <<"----- adding digis in GEM "<<d<<" with number of strips "<< ntrips<<endl;
+          for (int s = 1; s <= ntrips; ++s)
           {
-            cout<<" s="<<s<<endl;
+            if (s == 1 || s == ntrips) cout<<" s="<<s<<endl;
+            if (s == 2) cout<<"..."<<endl;
             GEMDigi gemDigi(s, 0);
             pDigis->insertDigi(d, gemDigi);  
           }
