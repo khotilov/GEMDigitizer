@@ -33,7 +33,11 @@ process.source = cms.Source("PoolSource",
     )
 )
 
-process.ana = cms.EDAnalyzer("GEMDigiAnalyzer")
+process.ana = cms.EDAnalyzer("GEMDigiAnalyzer",
+    verbosoty = cms.untracked.int32(1),
+    inputTagRPC = cms.InputTag("simMuonRPCDigis"),
+    inputTagGEM = cms.InputTag("simMuonGEMDigis")
+)
 
 
 process.p    = cms.Path(process.ana)
