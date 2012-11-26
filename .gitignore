@@ -1,0 +1,14 @@
+*~
+*.pyc
+*.root
+*.pdf
+*.eps
+*.ps
+*.png
+*.log*
+
+# directories
+
+CVS
+.svn
+tmp/
