@@ -1,6 +1,7 @@
 <use   name="boost"/>
 <use   name="DataFormats/MuonDetId"/>
 <use   name="DataFormats/GEMDigi"/>
+<use   name="DataFormats/RPCDigi"/>
 <use   name="FWCore/Framework"/>
 <use   name="FWCore/MessageLogger"/>
 <use   name="FWCore/ParameterSet"/>
@@ -24,5 +25,8 @@
 </library>
 <library   file="GEMSimHitAnalyzer.cc" name="GEMSimHitAnalyzer">
   <use name="Geometry/CSCGeometry"/>
+  <flags   EDM_PLUGIN="1"/>
+</library>
+<library   file="GEMDigiAnalyzer.cc" name="GEMDigiAnalyzer">
   <flags   EDM_PLUGIN="1"/>
 </library>
