@@ -6,6 +6,7 @@
 *.ps
 *.png
 *.log*
+*__init__.py
 
 # directories
 
