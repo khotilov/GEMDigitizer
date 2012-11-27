@@ -4,8 +4,8 @@ process = cms.Process("GEMANA")
 
 process.load('FWCore.MessageService.MessageLogger_cfi')
 
-#process.load('Geometry.CMSCommonData.cmsExtendedGeometryModularXMLGEM_cfi')
-process.load('Geometry.GEMGeometry.GeometryExtendedPostLS2plusGEM_cff')
+process.load('Geometry.GEMGeometry.cmsExtendedGeometryPostLS1plusGEMXML_cfi')
+process.load('Geometry.TrackerNumberingBuilder.trackerNumberingGeometry_cfi')
 process.load('Geometry.CommonDetUnit.globalTrackingGeometry_cfi')
 process.load('Geometry.MuonNumbering.muonNumberingInitialization_cfi')
 process.load('Geometry.GEMGeometry.gemGeometry_cfi')
@@ -35,8 +35,8 @@ process.source = cms.Source("PoolSource",
 
 process.ana = cms.EDAnalyzer("GEMDigiAnalyzer",
     verbosoty = cms.untracked.int32(1),
-    inputTagRPC = cms.InputTag("simMuonRPCDigis"),
-    inputTagGEM = cms.InputTag("simMuonGEMDigis")
+    inputTagRPC = cms.untracked.InputTag("simMuonRPCDigis"),
+    inputTagGEM = cms.untracked.InputTag("simMuonGEMDigis")
 )
 
 

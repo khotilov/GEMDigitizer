@@ -2,7 +2,7 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("GEMDIGI")
 
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1000) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 #process.Timing = cms.Service("Timing")
 process.options = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
@@ -16,9 +16,8 @@ process.load('Configuration.StandardSequences.MagneticField_38T_cff')
 process.load('Configuration.StandardSequences.Digi_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 
-#process.load('Geometry.CMSCommonData.cmsExtendedGeometryModularXMLGEM_cfi')
-#process.load('Geometry.TrackerNumberingBuilder.trackerNumberingGeometry_cfi')
-process.load('Geometry.GEMGeometry.GeometryExtendedPostLS2plusGEM_cff')
+process.load('Geometry.GEMGeometry.cmsExtendedGeometryPostLS1plusGEMXML_cfi')
+process.load('Geometry.TrackerNumberingBuilder.trackerNumberingGeometry_cfi')
 process.load('Geometry.CommonDetUnit.globalTrackingGeometry_cfi')
 process.load('Geometry.MuonNumbering.muonNumberingInitialization_cfi')
 process.load('Geometry.TrackerGeometryBuilder.idealForDigiTrackerGeometryDB_cff')
@@ -37,33 +36,20 @@ process.load('SimMuon.GEMDigitizer.muonGEMDigis_cfi')
 # customization of the process.pdigi sequence to add the GEM digitizer 
 from SimMuon.GEMDigitizer.customizeGEMDigi import *
 #process = customize_digi_addGEM(process)  # run all detectors digi
-#process = customize_digi_addGEM_muon_only(process) # only muon+GEM digi
-process = customize_digi_addGEM_gem_only(process)  # only GEM digi
+process = customize_digi_addGEM_muon_only(process) # only muon+GEM digi
+#process = customize_digi_addGEM_gem_only(process)  # only GEM digi
 
-
-inputFiles = [
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_positiveEta/res/sim_1_1_PnG.root',
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_positiveEta/res/sim_4_1_vyj.root',
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_positiveEta/res/sim_2_1_7eI.root',
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_positiveEta/res/sim_5_1_nqf.root',
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_positiveEta/res/sim_3_1_Xxd.root',
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_negativeEta/res/sim_1_1_huA.root',
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_negativeEta/res/sim_4_1_rdG.root',
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_negativeEta/res/sim_2_1_idm.root',
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_negativeEta/res/sim_5_1_pwT.root',
-    'file:/uscms_data/d2/willhf/CMSSW_6_0_0/src/50k_negativeEta/res/sim_3_1_nOE.root'
-]
 
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-        *inputFiles
+        'file:out_sim.root'
     )
 )
 
 
 process.output = cms.OutputModule("PoolOutputModule",
     fileName = cms.untracked.string( 
-        'out_digi2.root'
+        'out_digi.root'
     ),
     outputCommands = cms.untracked.vstring(
         'keep  *_*_*_*',
